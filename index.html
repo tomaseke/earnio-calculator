@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kalkulačka ROI</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <img
+        id="top-image"
+        src="https://www.earnio.com/files/earnio-logo-horizontal-transparentforbluebg-1200x320.png"
+        alt="Top Image"
+      />
+      <h1>Kalkulačka návratnosti investic</h1>
+
+      <label for="investment-amount">Částka investice (USD):</label>
+      <input
+        type="range"
+        id="investment-amount"
+        min="0"
+        max="100000"
+        step="1"
+      />
+      <input type="number" id="amount-input" min="0" max="100000" step="1" />
+
+      <label for="years">Počet let:</label>
+      <input type="range" id="years" min="1" max="20" />
+      <input type="number" id="years-input" min="1" max="20" />
+
+      <button id="calculate">Vypočítejte</button>
+      <div id="result">Výsledná hodnota:</div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
