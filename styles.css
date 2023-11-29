@@ -53,3 +53,9 @@ input[type="range"] {
   height: 34px;
   margin-bottom: 20px;
 }
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 90%;
+  }
+}
