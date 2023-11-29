@@ -7,7 +7,7 @@ document.getElementById('calculate').addEventListener('click', function() {
     console.log('Amount:', amount, 'Years:', years, 'Yearly Appreciation:', yearlyAppreciation);
 
     const finalValue = calculateFinalValue(amount, yearlyAppreciation, years);
-    document.getElementById('result').textContent = 'Výsledná hodnota: ' + new Intl.NumberFormat('cs-CZ').format(finalValue.toFixed(2)) + ' USD';
+    document.getElementById('result').textContent = 'Výsledná hodnota: ' + new Intl.NumberFormat('cs-CZ').format(finalValue.toFixed(2));
 });
 
 const appreciation = {

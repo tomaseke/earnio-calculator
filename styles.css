@@ -9,6 +9,7 @@ body {
 }
 
 #top-image {
+  position: relative;
   max-width: 100%;
   height: auto;
   border-radius: 16px;
@@ -57,4 +58,18 @@ input[type="range"] {
   .container {
     width: 90%;
   }
+}
+
+h3 {
+  color: white;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 20px;
+  margin-bottom: 15px;
+  font-size: 4vw;
+}
+
+#image {
+  max-width: 100%;
 }
