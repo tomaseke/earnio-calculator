@@ -16,24 +16,23 @@ document.getElementById('calculate').addEventListener('click', function() {
     const amount = parseInt(document.getElementById('investment-amount').value);
     const allocation = parseInt(document.getElementById('allocation').value);
     const years = parseInt(document.getElementById('years').value);
-    console.log(amount, appreciation[allocation], years * 12)
 
     const finalValue = calculateFinalValueRecursively(amount, appreciation[allocation], years * 12, 0);
     document.getElementById('result').textContent = 'Výsledná hodnota: ' + new Intl.NumberFormat('cs-CZ').format(finalValue.toFixed(2));
 });
 
 function calculateFinalValueRecursively (amount, appreciation, months, accruingAmount) {
-    console.log(amount, appreciation, months, accruingAmount, 'pppppp')
-    if (months === 0) return amount;
-    const dividendPlusAmount = appreciation * amount;
-    const dividend = dividendPlusAmount - amount;
+    console.log(amount, appreciation, months, accruingAmount)
+    if (months === 0) return amount + accruingAmount;
+
     let nextAmount;
     let nextAccruingAmount;
+
     if (accruingAmount >= 50) {
-        nextAmount = (accruingAmount + amount) * appreciation;
-        nextAccruingAmount = 0;
-    }
-    else {
+        nextAmount = accruingAmount + amount;
+        nextAccruingAmount = (appreciation - 1) * nextAmount;
+    } else {
+        const dividend = (appreciation - 1) * amount;
         nextAmount = amount;
         nextAccruingAmount = accruingAmount + dividend;
     }
