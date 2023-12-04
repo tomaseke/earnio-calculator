@@ -23,11 +23,21 @@ document.getElementById('calculate').addEventListener('click', function() {
 });
 
 function calculateFinalValueRecursively (amount, appreciation, months, accruingAmount) {
-    console.log(amount, appreciation, months, 'pppppp')
+    console.log(amount, appreciation, months, accruingAmount, 'pppppp')
     if (months === 0) return amount;
     const dividendPlusAmount = appreciation * amount;
-    const nextAmount = (dividendPlusAmount - amount >= 50) ? dividendPlusAmount : amount;
-    return calculateFinalValueRecursively((dividendPlusAmount - amount >= 50) ? amount + dividendPlusAmount : amount + accruingAmount, appreciation, months - 1);
+    const dividend = dividendPlusAmount - amount;
+    let nextAmount;
+    let nextAccruingAmount;
+    if (accruingAmount >= 50) {
+        nextAmount = (accruingAmount + amount) * appreciation;
+        nextAccruingAmount = 0;
+    }
+    else {
+        nextAmount = amount;
+        nextAccruingAmount = accruingAmount + dividend;
+    }
+    return calculateFinalValueRecursively(nextAmount, appreciation, months - 1, nextAccruingAmount);
 }
 
 // Sync range and number inputs
