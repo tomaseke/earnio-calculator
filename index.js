@@ -13,7 +13,7 @@ const appreciation = {
 };
 
 document.getElementById('calculate').addEventListener('click', function() {
-    const amount = parseInt(document.getElementById('investment-amount').value);
+    const amount = parseInt(document.getElementById('investment-amount').value?.replaceAll(' ', ''));
     const allocation = parseInt(document.getElementById('allocation').value);
     const years = parseInt(document.getElementById('years').value);
 
@@ -44,6 +44,6 @@ document.getElementById('investment-amount').addEventListener('input', syncInput
 document.getElementById('amount-input').addEventListener('input', syncInputs);
 
 function syncInputs(event) {
+    document.getElementById('amount-input').value = new Intl.NumberFormat('cs-CZ').format(event.target.value);
     document.getElementById('investment-amount').value = event.target.value;
-    document.getElementById('amount-input').value = event.target.value;
 }
