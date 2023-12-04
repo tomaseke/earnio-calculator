@@ -13,7 +13,7 @@ const appreciation = {
 };
 
 document.getElementById('calculate').addEventListener('click', function() {
-    const amount = parseInt(document.getElementById('investment-amount').value?.replaceAll(' ', ''));
+    const amount = parseInt(document.getElementById('amount-input').value?.replace(/[\u00A0\b]/g, '').replaceAll(' ', ''));
     const allocation = parseInt(document.getElementById('allocation').value);
     const years = parseInt(document.getElementById('years').value);
 
@@ -44,6 +44,9 @@ document.getElementById('investment-amount').addEventListener('input', syncInput
 document.getElementById('amount-input').addEventListener('input', syncInputs);
 
 function syncInputs(event) {
-    document.getElementById('amount-input').value = new Intl.NumberFormat('cs-CZ').format(event.target.value);
-    document.getElementById('investment-amount').value = event.target.value;
+    value = event.target.value.replace(/[\u00A0\b]/g, '').replaceAll(' ', '');
+    console.log(event.target.value, new Intl.NumberFormat('cs-CZ').format(event.target.value), typeof new Intl.NumberFormat('cs-CZ').format(event.target.value))
+    console.log(value, new Intl.NumberFormat('cs-CZ').format(value), typeof new Intl.NumberFormat('cs-CZ').format(value))
+    document.getElementById('amount-input').value = new Intl.NumberFormat('cs-CZ').format(value);
+    document.getElementById('investment-amount').value = value;
 }
