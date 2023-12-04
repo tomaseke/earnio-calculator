@@ -1,15 +1,3 @@
-document.getElementById('calculate').addEventListener('click', function() {
-    const amount = parseInt(document.getElementById('investment-amount').value);
-    const allocation = parseInt(document.getElementById('allocation').value);
-    const years = parseInt(document.getElementById('years').value);
-    const yearlyAppreciation = getYearlyAppreciation(allocation);
-
-    console.log('Amount:', amount, 'Years:', years, 'Yearly Appreciation:', yearlyAppreciation);
-
-    const finalValue = calculateFinalValue(amount, yearlyAppreciation, years);
-    document.getElementById('result').textContent = 'Výsledná hodnota: ' + new Intl.NumberFormat('cs-CZ').format(finalValue.toFixed(2));
-});
-
 const appreciation = {
     0: 1.01,
     100: 1.011,
@@ -24,13 +12,22 @@ const appreciation = {
     100000: 1.02,
 };
 
-function getYearlyAppreciation(stakedAmount) {
-     return Math.pow(appreciation[stakedAmount], 12);
-}
+document.getElementById('calculate').addEventListener('click', function() {
+    const amount = parseInt(document.getElementById('investment-amount').value);
+    const allocation = parseInt(document.getElementById('allocation').value);
+    const years = parseInt(document.getElementById('years').value);
+    console.log(amount, appreciation[allocation], years * 12)
 
-function calculateFinalValue(amount, yearlyAppreciation, years) {
-    console.log(amount, yearlyAppreciation, years, Math.pow(yearlyAppreciation, years))
-    return amount * Math.pow(yearlyAppreciation, years);
+    const finalValue = calculateFinalValueRecursively(amount, appreciation[allocation], years * 12, 0);
+    document.getElementById('result').textContent = 'Výsledná hodnota: ' + new Intl.NumberFormat('cs-CZ').format(finalValue.toFixed(2));
+});
+
+function calculateFinalValueRecursively (amount, appreciation, months, accruingAmount) {
+    console.log(amount, appreciation, months, 'pppppp')
+    if (months === 0) return amount;
+    const dividendPlusAmount = appreciation * amount;
+    const nextAmount = (dividendPlusAmount - amount >= 50) ? dividendPlusAmount : amount;
+    return calculateFinalValueRecursively((dividendPlusAmount - amount >= 50) ? amount + dividendPlusAmount : amount + accruingAmount, appreciation, months - 1);
 }
 
 // Sync range and number inputs
